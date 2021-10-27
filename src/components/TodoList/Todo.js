@@ -1,19 +1,20 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-const Todo = ( {name, onRemoveTodos, onChecked} ) => {
-  const handleRemoveTodos = useCallback( ( name ) => {
-    onRemoveTodos( name );
-  }, [onRemoveTodos] );
-  const handleChecked = useCallback( ( name ) => {
-    onChecked( name );
-  }, [onChecked] )
+const Todo = ({name, onRemoveTodos, onChecked}) => {
+  const handleRemoveTodos = useCallback(() => {
+    onRemoveTodos(name);
+  }, [name, onRemoveTodos]);
+  
+  const handleChecked = useCallback(() => {
+    onChecked(name);
+  }, [name, onChecked]);
   
   return (
     <li className='todo-item'>
-      <span>{ name }</span>
+      <span>{name}</span>
       <div className="todo-buttons">
-        <button onClick={ ( e ) => handleRemoveTodos( name ) } className="todo-remove"/>
-        <button onClick={ ( e ) => handleChecked( name ) } className="todo-complete"/>
+        <button onClick={handleRemoveTodos} className="todo-remove"/>
+        <button onClick={handleChecked} className="todo-complete"/>
       </div>
     </li>
   )

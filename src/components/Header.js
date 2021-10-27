@@ -1,42 +1,42 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-function Header( {onSetTodos, todos} ) {
-  const [value, setValue] = useState( '' );
+function Header({onSetTodos, todos}) {
+  const [value, setValue] = useState('');
   
-  const handleSetTodos = useCallback( ( name ) => {
-    const uniqTodo = !todos.find( ( {name: todoName} ) => todoName === name );
+  const handleSetTodos = useCallback((name) => {
+    const uniqTodo = !todos.find(({name: todoName}) => todoName === name);
     
     if ( name && uniqTodo ) {
-      onSetTodos( name );
+      onSetTodos(name);
     } else if ( !uniqTodo ) {
-      alert( 'Эта задача уже существует!' );
+      alert('Эта задача уже существует!');
     } else if ( !name ) {
-      alert( 'Нельзя добавлять пустую задачу!' );
-    }
+      alert('Нельзя добавлять пустую задачу!');
+    };
     
-    setValue( '' );
-  }, [todos, onSetTodos] );
+    setValue('');
+  }, [todos, onSetTodos]);
   
-  const handleSetValue = useCallback( ( name ) => {
-    setValue( name );
-  }, [] );
+  const handleChangeValue = useCallback((e) => {
+    setValue(e.target.value);
+  }, []);
   
   return (
     <header className="header">
       <form
         className="todo-control"
-        onSubmit={ ( e ) => {
+        onSubmit={(e) => {
           e.preventDefault();
-          handleSetTodos( value );
-        } }
+          handleSetTodos(value);
+        }}
       >
         <label>
           <input
-            value={ value }
+            value={value}
             className="header-input"
             type="text"
             placeholder="Какие планы?"
-            onChange={ e => handleSetValue( e.target.value ) }
+            onChange={handleChangeValue}
           />
         </label>
         <button className="header-button" id="add"/>
